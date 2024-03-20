@@ -2,7 +2,7 @@ package edu.pucmm.pw.controladores;
 
 
 import edu.pucmm.pw.entidades.Estudiante;
-import edu.pucmm.pw.servicios.FakeServices;
+import edu.pucmm.pw.servicios.EstudianteServices;
 import edu.pucmm.pw.util.BaseControlador;
 import io.javalin.Javalin;
 import io.javalin.rendering.JavalinRenderer;
@@ -19,7 +19,7 @@ import static io.javalin.apibuilder.ApiBuilder.*;
  */
 public class CrudTradicionalControlador extends BaseControlador {
 
-    FakeServices fakeServices = FakeServices.getInstancia();
+    EstudianteServices estudianteServices = EstudianteServices.getInstancia();
 
     public CrudTradicionalControlador(Javalin app) {
         super(app);
@@ -67,7 +67,7 @@ public class CrudTradicionalControlador extends BaseControlador {
 
                 get("/listar", ctx -> {
                     //tomando el parametro utl y validando el tipo.
-                    List<Estudiante> lista = fakeServices.listarEstudiante();
+                    List<Estudiante> lista = estudianteServices.listarEstudiante();
                     //
                     Map<String, Object> modelo = new HashMap<>();
                     modelo.put("titulo", "Listado de Estudiante");
@@ -97,12 +97,12 @@ public class CrudTradicionalControlador extends BaseControlador {
                     //
                     Estudiante tmp = new Estudiante(matricula, nombre, carrera);
                     //realizar algún tipo de validación...
-                    fakeServices.crearEstudiante(tmp); //puedo validar, existe un error enviar a otro vista.
+                    estudianteServices.crearEstudiante(tmp); //puedo validar, existe un error enviar a otro vista.
                     ctx.redirect("/crud-simple/");
                 });
 
                 get("/visualizar/{matricula}", ctx -> {
-                    Estudiante estudiante = fakeServices.getEstudiantePorMatricula(ctx.pathParamAsClass("matricula", Integer.class).get());
+                    Estudiante estudiante = estudianteServices.getEstudiantePorMatricula(ctx.pathParamAsClass("matricula", Integer.class).get());
                     //
                     Map<String, Object> modelo = new HashMap<>();
                     modelo.put("titulo", "Formulario Visaulizar Estudiante "+estudiante.getMatricula());
@@ -115,7 +115,7 @@ public class CrudTradicionalControlador extends BaseControlador {
                 });
 
                 get("/editar/{matricula}", ctx -> {
-                    Estudiante estudiante = fakeServices.getEstudiantePorMatricula(ctx.pathParamAsClass("matricula", Integer.class).get());
+                    Estudiante estudiante = estudianteServices.getEstudiantePorMatricula(ctx.pathParamAsClass("matricula", Integer.class).get());
                     //
                     Map<String, Object> modelo = new HashMap<>();
                     modelo.put("titulo", "Formulario Editar Estudiante "+estudiante.getMatricula());
@@ -138,7 +138,7 @@ public class CrudTradicionalControlador extends BaseControlador {
                     //
                     Estudiante tmp = new Estudiante(matricula, nombre, carrera, id);
                     //realizar algún tipo de validación...
-                    fakeServices.actualizarEstudiante(tmp); //puedo validar, existe un error enviar a otro vista.
+                    estudianteServices.actualizarEstudiante(tmp); //puedo validar, existe un error enviar a otro vista.
                     ctx.redirect("/crud-simple/");
                 });
 
@@ -146,7 +146,7 @@ public class CrudTradicionalControlador extends BaseControlador {
                  * Puede ser implementando por el metodo post, por simplicidad utilizo el get. ;-D
                  */
                 get("/eliminar/{matricula}", ctx -> {
-                    fakeServices.eliminandoEstudiante(ctx.pathParamAsClass("matricula", Integer.class).get());
+                    estudianteServices.eliminandoEstudiante(ctx.pathParamAsClass("matricula", Integer.class).get());
                     ctx.redirect("/crud-simple/");
                 });
 

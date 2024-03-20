@@ -6,6 +6,13 @@ Proyecto demostrativo para integrar Javalin con la funcionalidades de un CRUD y 
 * Javalin 5.6.1
 * JDK 17
 * MongoDB
+* Gradle 8.5
 
 ## Para Arrancar:
 
+```
+gradlew run
+```
+## Probar:
+
+http://localhost:7000/

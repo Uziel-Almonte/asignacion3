@@ -2,7 +2,7 @@ package edu.pucmm.pw.controladores;
 
 
 import edu.pucmm.pw.entidades.Estudiante;
-import edu.pucmm.pw.servicios.FakeServices;
+import edu.pucmm.pw.servicios.EstudianteServices;
 import edu.pucmm.pw.util.BaseControlador;
 import edu.pucmm.pw.util.NoExisteEstudianteException;
 import io.javalin.Javalin;
@@ -12,7 +12,7 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class ApiControlador extends BaseControlador {
 
-    private FakeServices fakeServices = FakeServices.getInstancia();
+    private EstudianteServices estudianteServices = EstudianteServices.getInstancia();
 
     public ApiControlador(Javalin app) {
         super(app);
@@ -32,31 +32,31 @@ public class ApiControlador extends BaseControlador {
                     });
 
                     get("/", ctx -> {
-                        ctx.json(fakeServices.listarEstudiante());
+                        ctx.json(estudianteServices.listarEstudiante());
                     });
 
                     get("/{matricula}", ctx -> {
-                        ctx.json(fakeServices.getEstudiantePorMatricula(ctx.pathParamAsClass("matricula", Integer.class).get()));
+                        ctx.json(estudianteServices.getEstudiantePorMatricula(ctx.pathParamAsClass("matricula", Integer.class).get()));
                     });
 
                     post("/", ctx -> {
                         //parseando la informacion del POJO debe venir en formato json.
                         Estudiante tmp = ctx.bodyAsClass(Estudiante.class);
                         //creando.
-                        ctx.json(fakeServices.crearEstudiante(tmp));
+                        ctx.json(estudianteServices.crearEstudiante(tmp));
                     });
 
                     put("/", ctx -> {
                         //parseando la informacion del POJO.
                         Estudiante tmp = ctx.bodyAsClass(Estudiante.class);
                         //creando.
-                        ctx.json(fakeServices.actualizarEstudiante(tmp));
+                        ctx.json(estudianteServices.actualizarEstudiante(tmp));
 
                     });
 
                     delete("/{matricula}", ctx -> {
                         //creando.
-                        ctx.json(fakeServices.eliminandoEstudiante(ctx.pathParamAsClass("matricula", Integer.class).get()));
+                        ctx.json(estudianteServices.eliminandoEstudiante(ctx.pathParamAsClass("matricula", Integer.class).get()));
                     });
                 });
             });

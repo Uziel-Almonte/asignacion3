@@ -34,6 +34,10 @@ public class Main {
 
         });
 
+        app.get("/", context -> {
+            context.result("Proyecto CRUD MongoDB");
+        });
+
         //Iniciando la aplicación
         app.start(getPuertoDimanico());
 

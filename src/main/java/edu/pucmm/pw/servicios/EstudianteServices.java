@@ -1,7 +1,6 @@
 package edu.pucmm.pw.servicios;
 
 
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.result.InsertOneResult;
@@ -14,14 +13,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Ejemplo de servicio patron Singleton
  */
-public class FakeServices {
+public class EstudianteServices {
 
-    private static FakeServices instancia;
+    private static EstudianteServices instancia;
     private MongoDbConexion mongoDbConexion;
 
 
@@ -29,16 +27,16 @@ public class FakeServices {
     /**
      * Constructor privado.
      */
-    private FakeServices(){
+    private EstudianteServices(){
         //
         mongoDbConexion = MongoDbConexion.getInstance();
         mongoDbConexion.getBaseDatos();
 
     }
 
-    public static FakeServices getInstancia(){
+    public static EstudianteServices getInstancia(){
         if(instancia==null){
-            instancia = new FakeServices();
+            instancia = new EstudianteServices();
         }
         return instancia;
     }

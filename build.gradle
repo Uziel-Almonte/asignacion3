@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 group = 'edu.pucmm.pw'
@@ -36,6 +37,12 @@ dependencies {
     implementation 'com.j2html:j2html:1.6.0'
 
 
+}
+
+shadowJar{
+    archiveBaseName.set("crud-dns")
+    archiveClassifier.set('')
+    archiveVersion.set('')
 }
 
 test {
