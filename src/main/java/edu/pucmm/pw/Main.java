@@ -2,6 +2,8 @@ package edu.pucmm.pw;
 
 import edu.pucmm.pw.controladores.ApiControlador;
 import edu.pucmm.pw.controladores.CrudTradicionalControlador;
+import edu.pucmm.pw.servicios.DataInitializer;
+import edu.pucmm.pw.servicios.HibernateUtil;
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 
@@ -9,7 +11,11 @@ import io.javalin.http.staticfiles.Location;
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        System.out.println("CRUD Javalin MongoDB");
+        System.out.println("CRUD Javalin MongoDB + Hibernate");
+
+        // Inicializar Hibernate
+        HibernateUtil.getSessionFactory();
+        DataInitializer.initData();
 
         //Creando la instancia del servidor y configurando.
         Javalin app = Javalin.create(config ->{
@@ -35,7 +41,7 @@ public class Main {
         });
 
         app.get("/", context -> {
-            context.result("Proyecto CRUD MongoDB");
+            context.result("Proyecto CRUD MongoDB + hibernate");
         });
 
         //Iniciando la aplicación

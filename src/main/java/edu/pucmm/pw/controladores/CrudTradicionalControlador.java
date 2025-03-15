@@ -134,11 +134,12 @@ public class CrudTradicionalControlador extends BaseControlador {
                     int matricula = ctx.formParamAsClass("matricula", Integer.class).get();
                     String nombre = ctx.formParam("nombre");
                     String carrera = ctx.formParam("carrera");
-                    String id = ctx.formParam("_id");
-                    //
-                    Estudiante tmp = new Estudiante(matricula, nombre, carrera, id);
+                    // Removing the id parameter since we don't need it
+                    
+                    // Using the correct 3-parameter constructor
+                    Estudiante tmp = new Estudiante(matricula, nombre, carrera);
                     //realizar algún tipo de validación...
-                    estudianteServices.actualizarEstudiante(tmp); //puedo validar, existe un error enviar a otro vista.
+                    estudianteServices.actualizarEstudiante(tmp);
                     ctx.redirect("/crud-simple/");
                 });
 
@@ -153,4 +154,9 @@ public class CrudTradicionalControlador extends BaseControlador {
             });
         });
     }
+
+    // Remove or comment out the procesarParametros method since it's not being used
+    /*private void procesarParametros(Context ctx) {
+        // ...
+    }*/
 }

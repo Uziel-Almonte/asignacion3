@@ -1,24 +1,21 @@
 package edu.pucmm.pw.entidades;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * Objeto con estructura POJO.
- */
-public class Estudiante {
+@Entity
+@Table(name = "ESTUDIANTE")
+public class Estudiante implements Serializable {
 
+    @Id
     private int matricula;
+    
+    @Column(name = "NOMBRE")
     private String nombre;
+    
+    @Column(name = "CARRERA")
     private String carrera;
-    private String id;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public Estudiante() {
     }
@@ -27,13 +24,6 @@ public class Estudiante {
         this.matricula = matricula;
         this.nombre = nombre;
         this.carrera = carrera;
-    }
-
-    public Estudiante(int matricula, String nombre, String carrera, String id) {
-        this.matricula = matricula;
-        this.nombre = nombre;
-        this.carrera = carrera;
-        this.id = id;
     }
 
     public int getMatricula() {
@@ -60,12 +50,6 @@ public class Estudiante {
         this.carrera = carrera;
     }
 
-    public void mezclar(Estudiante e){
-        matricula = e.getMatricula();
-        nombre = e.getNombre();
-        carrera = e.getCarrera();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,7 +69,6 @@ public class Estudiante {
                 "matricula=" + matricula +
                 ", nombre='" + nombre + '\'' +
                 ", carrera='" + carrera + '\'' +
-                ", id='" + id + '\'' +
                 '}';
     }
 }
